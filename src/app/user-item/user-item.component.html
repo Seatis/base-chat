@@ -4,5 +4,11 @@
   <span class="userName">
     {{user.displayName}}
   </span>
+  <table>
+  <tr *ngFor='let user of sqlUsers'>
+    <td>{{ user.message_id }}</td>
+    <td>{{ user.message_text }}</td>
+  </tr>
+</table>
 </div>
 <!-- *ngIf="user.status==='online'" -->

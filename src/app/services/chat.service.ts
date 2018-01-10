@@ -7,6 +7,9 @@ import * as firebase from 'firebase/app';
 
 import { ChatMessage } from '../models/chat-message.model';
 
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+
 @Injectable()
 export class ChatService {
   user: firebase.User;
@@ -16,7 +19,8 @@ export class ChatService {
 
   constructor(
     private db: AngularFireDatabase,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    public http: Http
     ) {
         this.afAuth.authState.subscribe(auth => {
           if (auth !== undefined && auth !== null) {
@@ -71,5 +75,10 @@ export class ChatService {
                  now.getUTCSeconds();
 
     return (date + ' ' + time);
+  }
+
+  getLocalHost(){
+    return this.http.get('http://localhost:5000')
+    .map(res => res.json());
   }
 }

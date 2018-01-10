@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChatService } from '../services/chat.service';
 import { User } from '../models/user.model';
+import { sqlTest } from '../models/test';
 
 @Component({
   selector: 'app-user-item',
@@ -9,11 +10,16 @@ import { User } from '../models/user.model';
 })
 export class UserItemComponent implements OnInit {
 
+  sqlUsers: sqlTest [];
+
   @Input() user: User;
 
-  constructor() { }
+  constructor(private chatService: ChatService) { }
 
   ngOnInit() {
+    this.chatService.getLocalHost().subscribe((response) => {
+      this.sqlUsers = response;
+    });
   }
 
 }
